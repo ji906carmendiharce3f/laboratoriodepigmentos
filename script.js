@@ -69,7 +69,8 @@ function getTotalVolumen() {
 
 function crearCapa(texto, color, valor, altura, opacidad = 1) {
   const div = document.createElement("div");
-  div.className = "capa";
+div.className = "capa";
+div.style.transition = "all 0.3s ease-in-out";
   div.style.backgroundColor = color;
   div.style.height = `${altura}%`;
   div.style.opacity = opacidad;
@@ -112,7 +113,10 @@ function calcularColorArray() {
 
   const agua = ingredientes.agua;
  
-  let factor = Math.min(1, Math.max(0.3, totalResiduos / (totalResiduos + agua / 100)));
+ // Mezcla menos agresiva: el mínimo factor es 0.85, casi no se aclara
+let proporción = totalResiduos / (totalResiduos + ingredientes.agua / 100);
+let factor = Math.max(0.85, proporción); // permite que se aclare muy poco si hay más agua
+
 
   r = Math.round(r * factor + 255 * (1 - factor));
   g = Math.round(g * factor + 255 * (1 - factor));
@@ -128,6 +132,7 @@ function interpolateColor(color1, color2, factor) {
 function rgbArrayToString(rgbArr) {
   return `rgb(${rgbArr[0]},${rgbArr[1]},${rgbArr[2]})`;
 }
+
 function actualizarVisual() {
   const tubo = document.querySelector(".tubo-container");
   tubo.innerHTML = "";
@@ -160,20 +165,21 @@ function actualizarVisual() {
 
     if (ingredientes.cafe > 0) {
       const h = (ingredientes.cafe / totalResiduos) * residuosAltura;
-      tubo.appendChild(crearCapa("Café", "#6F4E37", ingredientes.cafe, h));
+      tubo.appendChild(crearCapa("Café", "#4b3100", ingredientes.cafe, h));
     }
     if (ingredientes.te > 0) {
       const h = (ingredientes.te / totalResiduos) * residuosAltura;
-      tubo.appendChild(crearCapa("Saquito de Té", "#C1440E", ingredientes.te, h));
+      tubo.appendChild(crearCapa("Saquito de Té", "#ff4500", ingredientes.te, h));
     }
     if (ingredientes.yerba > 0) {
       const h = (ingredientes.yerba / totalResiduos) * residuosAltura;
-      tubo.appendChild(crearCapa("Yerba", "#3B7A57", ingredientes.yerba, h));
+      tubo.appendChild(crearCapa("Yerba", "#003d00", ingredientes.yerba, h));
     }
     if (ingredientes.agua > 0) {
       tubo.appendChild(crearCapa("Agua", "#AADDFF", ingredientes.agua / 100, aguaAltura));
     }
   }
+  
 }
 
 
@@ -185,13 +191,50 @@ function empezarMezcla() {
   if (mezclaInterval) clearInterval(mezclaInterval);
   mezclaInterval = setInterval(() => {
     if (mezclaProgreso < 1) {
-      mezclaProgreso += 0.02;
+      mezclaProgreso += 0.01;
       if (mezclaProgreso > 1) mezclaProgreso = 1;
       actualizarVisual();
     }
-  }, 50);
+  }, 40);
 }
 
 function terminarMezcla() {
   if (mezclaInterval) clearInterval(mezclaInterval);
 }
+// Soporte para toque en dispositivos móviles
+document.getElementById("btn-mezcla").addEventListener("touchstart", (e) => {
+  e.preventDefault(); // evita el doble toque o scroll accidental
+  empezarMezcla();
+});
+
+document.getElementById("btn-mezcla").addEventListener("touchend", (e) => {
+  e.preventDefault();
+  terminarMezcla();
+});
+
+document.getElementById("btn-mezcla").addEventListener("touchcancel", (e) => {
+  e.preventDefault();
+  terminarMezcla();
+});
+const btnMezcla = document.getElementById("btn-mezcla");
+
+// Mouse
+btnMezcla.addEventListener("mousedown", empezarMezcla);
+btnMezcla.addEventListener("mouseup", terminarMezcla);
+btnMezcla.addEventListener("mouseleave", terminarMezcla);
+
+// Touch (teléfono/tablet)
+btnMezcla.addEventListener("touchstart", (e) => {
+  e.preventDefault(); // evita zoom doble toque o scroll
+  empezarMezcla();
+}, { passive: false });
+
+btnMezcla.addEventListener("touchend", (e) => {
+  e.preventDefault();
+  terminarMezcla();
+}, { passive: false });
+
+btnMezcla.addEventListener("touchcancel", (e) => {
+  e.preventDefault();
+  terminarMezcla();
+}, { passive: false });
