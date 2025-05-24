@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LABORATORIO DE PIGMENTOS</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <p>Agregá el residuo orgánico</p>
+
+    <div class="botones">
+
+        <div class="fila-ingredientes">
+            <button id="btn-cafe" onclick="agregarIngrediente('cafe')">CAFÉ</button>
+            <button id="btn-te" onclick="agregarIngrediente('te')">SAQUITO DE TÉ</button>
+            <button id="btn-yerba" onclick="agregarIngrediente('yerba')">YERBA MATE</button>
+        </div>
+
+        <div class="container">
+            <div class="tubo-container">
+                <div id="liquido"></div>
+            </div>
+        </div>
+
+        <div class="fila-acciones">
+            <button onclick="agregarAgua()">+ AGUA (100ml)</button>
+            <button onmousedown="empezarMezcla()" onmouseup="terminarMezcla()" onmouseleave="terminarMezcla()">Mezclar</button>
+        </div>
+
+        <button class="reiniciar" onclick="reiniciarSimulador()">Reiniciar</button>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+
+</html>
