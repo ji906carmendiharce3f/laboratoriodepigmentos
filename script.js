@@ -1,3 +1,9 @@
+document.getElementById('btn-comenzar').addEventListener('click', () => {
+  document.getElementById('pantalla-inicio').style.display = 'none';
+  document.getElementById('simulador').style.display = 'block';
+});
+
+
 let ingredientes = {
   cafe: 0,
   te: 0,
@@ -87,7 +93,7 @@ div.style.transition = "all 0.3s ease-in-out";
 
 function calcularColorArray() {
   const totalResiduos = getTotalResiduos();
-  if (totalResiduos === 0) return [255, 255, 255]; 
+  if (totalResiduos === 0) return [255, 255, 255];
 
   let r = 0, g = 0, b = 0;
 
@@ -107,23 +113,25 @@ function calcularColorArray() {
     b += 87 * ingredientes.yerba;
   }
 
+  // Promediar el color base según la cantidad de residuos
   r = Math.round(r / totalResiduos);
   g = Math.round(g / totalResiduos);
   b = Math.round(b / totalResiduos);
 
-  const agua = ingredientes.agua;
- 
- // Mezcla menos agresiva: el mínimo factor es 0.85, casi no se aclara
-let proporción = totalResiduos / (totalResiduos + ingredientes.agua / 100);
-let factor = Math.max(0.85, proporción); // permite que se aclare muy poco si hay más agua
+  // Aclarado en función del agua
+  const aclaradoPor100ml = 10;
+  const cantidadAgua = ingredientes.agua; // en ml
+  const aclaradoMaximo = 255;
+  const aclarado = Math.min((cantidadAgua / 100) * aclaradoPor100ml, aclaradoMaximo);
 
-
-  r = Math.round(r * factor + 255 * (1 - factor));
-  g = Math.round(g * factor + 255 * (1 - factor));
-  b = Math.round(b * factor + 255 * (1 - factor));
+  // Aplicar aclarado hacia blanco
+  r = Math.min(255, r + aclarado);
+  g = Math.min(255, g + aclarado);
+  b = Math.min(255, b + aclarado);
 
   return [r, g, b];
 }
+
 
 function interpolateColor(color1, color2, factor) {
   return color1.map((c, i) => Math.round(c + factor * (color2[i] - c)));
@@ -152,7 +160,7 @@ function actualizarVisual() {
 
   
   if (mezclaProgreso > 0) {
-    const mezclaDiv = crearCapa("Mezcla", colorStr, "", mezclaAltura);
+    const mezclaDiv = crearCapa("Pigmento", colorStr, "", mezclaAltura);
     mezclaDiv.style.opacity = 1;
     tubo.appendChild(mezclaDiv);
   }

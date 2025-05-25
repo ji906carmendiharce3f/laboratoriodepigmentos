@@ -6,37 +6,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LABORATORIO DE PIGMENTOS</title>
     <link rel="stylesheet" href="styles.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
 </head>
 
 <body>
-    <p>Agregá el residuo orgánico</p>
 
-    <div class="botones">
+    <!-- Pantalla de inicio -->
+    <div id="pantalla-inicio" class="pantalla-inicio">
+        <div class="col">
+            <div class="row">
+                <img src="./logolab.png" alt="Logo del laboratorio" style="width: 75vw; height: auto;" />
 
-        <div class="fila-ingredientes">
-            <button id="btn-cafe" onclick="agregarIngrediente('cafe')">CAFÉ</button>
-            <button id="btn-te" onclick="agregarIngrediente('te')">SAQUITO DE TÉ</button>
-            <button id="btn-yerba" onclick="agregarIngrediente('yerba')">YERBA MATE</button>
-        </div>
+            </div>
+            <div class="row">
 
-        <div class="container">
-            <div class="tubo-container">
-                <div id="liquido"></div>
+                <h4>
+                    Elegí un residuo orgánico: <strong>café</strong>, <strong>saquito de té</strong> o <strong>yerba
+                        mate</strong>.<br />
+                    Cada vez que lo agregás, equivale a una <strong>cucharada</strong> del residuo.<br />
+                    Al tocar el botón de agua, sumás <strong>100 ml</strong> por cada toque.<br />
+                    Para mezclar, <strong>mantené apretado</strong> el botón de mezcla y observá cómo se genera un
+                    <strong>pigmento natural</strong>.
+                </h4>
+
+                <br />
+                <button id="btn-comenzar">COMENZAR</button>
             </div>
         </div>
 
-        <div class="fila-acciones">
-            <button id="btn-agua" onclick="agregarAgua()">+ AGUA (100ml)</button>
-            <button id="btn-mezcla">MEZCLAR</button>
 
+
+    </div>
+
+    <div id="simulador" style="display: none;">
+
+        <div class="botones">
+            <div class="fila-ingredientes">
+                <button id="btn-cafe" onclick="agregarIngrediente('cafe')">CAFÉ</button>
+                <button id="btn-te" onclick="agregarIngrediente('te')">SAQUITO DE TÉ</button>
+                <button id="btn-yerba" onclick="agregarIngrediente('yerba')">YERBA MATE</button>
+            </div>
+
+            <div class="container">
+                <div class="tubo-container" id="tubo">
+
+                </div>
+            </div>
+
+            <div class="fila-acciones">
+                <button id="btn-agua" onclick="agregarAgua()">+ AGUA (100ml)</button>
+                <button id="btn-mezcla">MEZCLAR</button>
+            </div>
+
+            <button class="reiniciar" onclick="reiniciarSimulador()">REINICIAR</button>
         </div>
-
-        <button class="reiniciar" onclick="reiniciarSimulador()">REINICIAR</button>
-
     </div>
 
     <script src="script.js"></script>
 </body>
-
 
 </html>
