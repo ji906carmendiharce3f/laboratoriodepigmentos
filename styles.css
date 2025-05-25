@@ -18,7 +18,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Cambiado para centrar verticalmente */
+  justify-content: flex-start;
   min-height: 100vh;
   padding: 20px;
 }
@@ -61,8 +61,8 @@ p {
   font-size: 0.7rem;
   color: white;
   font-weight: bold;
-  text-transform: uppercase; /* convierte el texto a mayúsculas */
-  text-align: center;        /* centra el texto multilinea */
+  text-transform: uppercase;
+  text-align: center;
   transition: height 0.3s;
 }
 
@@ -72,19 +72,6 @@ p {
   gap: 20px;
   width: 100%;
   max-width: 600px;
-}
-
-/* Nuevo bloque para centrar el simulador completo */
-#simulador {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 600px;
-  height: 100vh; /* ocupa toda la altura visible */
-  box-sizing: border-box;
-  padding: 20px;
 }
 
 .fila-acciones {
@@ -143,17 +130,18 @@ button {
   border-radius: 8px;
   transition: background-color 0.3s ease-in-out;
 }
+
 .fila-ingredientes {
   display: flex;
   justify-content: space-between;
   gap: 10px;
   padding: 10px;
-  flex-wrap: nowrap; 
+  flex-wrap: nowrap;
 }
 
 .fila-ingredientes button {
   flex: 1 1 0;
-  min-width: 0; 
+  min-width: 0;
   padding: 15px;
   font-size: 16px;
   border: none;
@@ -163,7 +151,7 @@ button {
   text-align: center;
 }
 
-/* Media Queries para pantallas más pequeñas */
+/* ✅ Media Queries para pantallas más pequeñas */
 @media (max-width: 600px) {
   p {
     font-size: 1.2rem;
@@ -183,9 +171,17 @@ button {
     font-size: 1rem;
   }
 
+  /* Centrar el simulador en pantallas pequeñas */
   #simulador {
-    height: auto;  /* Para que no haya scroll innecesario en móvil */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
     min-height: 80vh;
+    padding: 20px;
+    box-sizing: border-box;
   }
 }
 
