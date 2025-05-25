@@ -1,7 +1,18 @@
-document.getElementById('btn-comenzar').addEventListener('click', () => {
+const btnComenzar = document.getElementById('btn-comenzar');
+
+function iniciarSimulador() {
   document.getElementById('pantalla-inicio').style.display = 'none';
   document.getElementById('simulador').style.display = 'block';
-});
+}
+
+// Soporte para mouse
+btnComenzar.addEventListener('click', iniciarSimulador);
+
+// Soporte para pantallas táctiles
+btnComenzar.addEventListener('touchstart', (e) => {
+  e.preventDefault(); // Previene doble activación
+  iniciarSimulador();
+}, { passive: false });
 
 
 let ingredientes = {
@@ -75,8 +86,8 @@ function getTotalVolumen() {
 
 function crearCapa(texto, color, valor, altura, opacidad = 1) {
   const div = document.createElement("div");
-div.className = "capa";
-div.style.transition = "all 0.3s ease-in-out";
+  div.className = "capa";
+  div.style.transition = "all 0.3s ease-in-out";
   div.style.backgroundColor = color;
   div.style.height = `${altura}%`;
   div.style.opacity = opacidad;
@@ -86,6 +97,8 @@ div.style.transition = "all 0.3s ease-in-out";
   div.style.color = "white";
   div.style.fontWeight = "bold";
   div.style.fontSize = "0.8rem";
+  div.style.textTransform = "uppercase";
+  div.style.textAlign = "center";
   div.innerText = texto ? (valor ? `${texto} (${valor})` : texto) : "";
 
   return div;
@@ -113,25 +126,21 @@ function calcularColorArray() {
     b += 87 * ingredientes.yerba;
   }
 
-  // Promediar el color base según la cantidad de residuos
   r = Math.round(r / totalResiduos);
   g = Math.round(g / totalResiduos);
   b = Math.round(b / totalResiduos);
 
-  // Aclarado en función del agua
   const aclaradoPor100ml = 10;
-  const cantidadAgua = ingredientes.agua; // en ml
+  const cantidadAgua = ingredientes.agua;
   const aclaradoMaximo = 255;
   const aclarado = Math.min((cantidadAgua / 100) * aclaradoPor100ml, aclaradoMaximo);
 
-  // Aplicar aclarado hacia blanco
   r = Math.min(255, r + aclarado);
   g = Math.min(255, g + aclarado);
   b = Math.min(255, b + aclarado);
 
   return [r, g, b];
 }
-
 
 function interpolateColor(color1, color2, factor) {
   return color1.map((c, i) => Math.round(c + factor * (color2[i] - c)));
@@ -149,23 +158,20 @@ function actualizarVisual() {
   const totalVolumen = getTotalVolumen();
   if (totalVolumen === 0) return;
 
-  const alturaTotal = 100; 
+  const alturaTotal = 100;
   const mezclaAltura = mezclaProgreso * alturaTotal;
 
-
-  const colorBase = [255, 255, 255]; 
+  const colorBase = [255, 255, 255];
   const colorFinal = calcularColorArray();
   const colorIntermedio = interpolateColor(colorBase, colorFinal, mezclaProgreso);
   const colorStr = rgbArrayToString(colorIntermedio);
 
-  
   if (mezclaProgreso > 0) {
     const mezclaDiv = crearCapa("Pigmento", colorStr, "", mezclaAltura);
     mezclaDiv.style.opacity = 1;
     tubo.appendChild(mezclaDiv);
   }
 
- 
   const alturaRestante = alturaTotal - mezclaAltura;
   if (mezclaProgreso < 1) {
     const residuosAltura = (totalResiduos / totalVolumen) * alturaRestante;
@@ -187,9 +193,7 @@ function actualizarVisual() {
       tubo.appendChild(crearCapa("Agua", "#AADDFF", ingredientes.agua / 100, aguaAltura));
     }
   }
-  
 }
-
 
 function empezarMezcla() {
   if (getTotalResiduos() === 0) {
@@ -209,31 +213,16 @@ function empezarMezcla() {
 function terminarMezcla() {
   if (mezclaInterval) clearInterval(mezclaInterval);
 }
-// Soporte para toque en dispositivos móviles
-document.getElementById("btn-mezcla").addEventListener("touchstart", (e) => {
-  e.preventDefault(); // evita el doble toque o scroll accidental
-  empezarMezcla();
-});
 
-document.getElementById("btn-mezcla").addEventListener("touchend", (e) => {
-  e.preventDefault();
-  terminarMezcla();
-});
-
-document.getElementById("btn-mezcla").addEventListener("touchcancel", (e) => {
-  e.preventDefault();
-  terminarMezcla();
-});
+// Soporte para mezcla (mouse y touch)
 const btnMezcla = document.getElementById("btn-mezcla");
 
-// Mouse
 btnMezcla.addEventListener("mousedown", empezarMezcla);
 btnMezcla.addEventListener("mouseup", terminarMezcla);
 btnMezcla.addEventListener("mouseleave", terminarMezcla);
 
-// Touch (teléfono/tablet)
 btnMezcla.addEventListener("touchstart", (e) => {
-  e.preventDefault(); // evita zoom doble toque o scroll
+  e.preventDefault();
   empezarMezcla();
 }, { passive: false });
 

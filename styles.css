@@ -64,8 +64,11 @@ p {
   font-size: 0.7rem;
   color: white;
   font-weight: bold;
+  text-transform: uppercase; /* <-- convierte el texto a mayúsculas */
+  text-align: center;        /* <-- asegura que esté centrado si el texto ocupa varias líneas */
   transition: height 0.3s;
 }
+
 
 .botones {
   display: flex;
@@ -167,7 +170,6 @@ button {
     font-size: 0.9rem;
     min-width: 100px;
   }
-
 
   .reiniciar {
     font-size: 1rem;
