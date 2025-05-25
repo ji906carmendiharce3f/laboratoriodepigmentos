@@ -149,7 +149,12 @@ button {
   color: white;
   cursor: pointer;
   text-align: center;
+
+  display: flex;           /* Para centrar el texto verticalmente */
+  align-items: center;     /* Centrado vertical */
+  justify-content: center; /* Centrado horizontal */
 }
+
 
 /* ✅ Media Queries para pantallas más pequeñas */
 @media (max-width: 600px) {
