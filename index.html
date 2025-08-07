@@ -3,66 +3,107 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LABORATORIO DE PIGMENTOS - Jardín Nº 906 - Carmen Diharce - 3F</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LABORATORIO DE PIGMENTOS</title>
     <link rel="stylesheet" href="styles.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-
+        rel="stylesheet" />
 </head>
 
 <body>
-
+    <!-- PANTALLA INICIAL -->
     <div id="pantalla-inicio" class="pantalla-inicio">
         <div class="col">
             <div class="row">
-                <img src="./logolab.png" alt="Logo del laboratorio" style="width: 75vw; height: auto;" />
-
+                <img src="./logolab.png" alt="Logo del laboratorio" style="width: 30vw; height: auto;" />
             </div>
             <div class="row">
                 <br />
-                <h4>
-                    Elegí un residuo orgánico: <strong>café</strong>, <strong>saquito de té</strong> o <strong>yerba
-                        mate</strong>.<br />
-                    Cada vez que lo agregás, equivale a una <strong>cucharada</strong> del residuo.<br />
-                    Al tocar el botón de agua, sumás <strong>100 ml</strong> por cada toque.<br />
-                    Para mezclar, <strong>mantené apretado</strong> el botón de mezcla y observá cómo se genera el
-                    <strong>pigmento</strong>.
-                </h4>
+                <h4>Elegí tu tipo de obtención de pigmentos:</h4>
 
+            </div>
+            <div class="row" style="align-self: center;">
+                <button id="btn-residuos">RESIDUOS CON AGUA</button>
+                <button id="btn-verduras">AGUA DE VERDURAS</button>
+            </div>
+
+            <div class="row">
                 <br />
-                <button id="btn-comenzar">COMENZAR</button>
+                <h5>
+                    Si elegís residuos, comenzás con 1 cucharada del residuo y 100 ml de agua. Cada vez que presionás el
+                    botón del residuo, se suma 1 cucharada más del mismo residuo. También podés agregarle agua de a
+                    100ml. <br>
+                    Si preferís obtener pigmentos con verduras, la cantidad de agua se mantiene fija en 100 ml. Cada vez
+                    que presionás el botón de la verdura, se agrega 1 verdura más, sin cambiar el volumen de agua.
+                    ¡Descubrí cómo cambian los pigmentos!
+                </h5>
+
             </div>
         </div>
-
-
-
     </div>
 
-    <div id="simulador" style="display: none;">
-
+    <!-- SIMULADOR RESIDUOS -->
+    <div id="simulador-residuos" style="display: none;">
         <div class="botones">
             <div class="fila-ingredientes">
-                <button id="btn-cafe" onclick="agregarIngrediente('cafe')">CAFÉ</button>
-                <button id="btn-te" onclick="agregarIngrediente('te')">SAQUITO DE TÉ</button>
-                <button id="btn-yerba" onclick="agregarIngrediente('yerba')">YERBA MATE</button>
+                <button id="btn-cafe">CAFÉ</button>
+                <button id="btn-te">SAQUITO DE TÉ</button>
+                <button id="btn-yerba">YERBA MATE</button>
             </div>
 
             <div class="container">
-                <div class="tubo-container" id="tubo">
-
-                </div>
+                <div class="tubo-container" id="tubo"></div>
             </div>
 
             <div class="fila-acciones">
-                <button id="btn-agua" onclick="agregarAgua()">+ AGUA (100ml)</button>
-                <button id="btn-mezcla">MEZCLAR</button>
+                <button id="btn-agua">+ AGUA (100ml)</button>
+                <button id="btn-mezclar">MEZCLAR</button>
+                <button class="reiniciar">REINICIAR</button>
+             <a href="https://ji906carmendiharce3f.github.io/laboratoriodepigmentos">
+    <button id="volver">VOLVER</button>
+</a>
+
             </div>
 
-            <button class="reiniciar" onclick="reiniciarSimulador()">REINICIAR</button>
+        </div>
+
+    </div>
+
+
+    <!-- SIMULADOR VERDURAS -->
+    <div id="simulador-verduras" style="display: none;">
+        <div id="advertencia" style="color: red; font-weight: bold; text-align: center; margin-top: 8px;">
+            ⚠️ <strong>Advertencia:</strong><br />
+            Este es un <strong>simulador virtual</strong> para fines educativos.<br />
+            <strong>NO INTENTE ESTO EN SU CASA.</strong><br />
+            En un contexto real, esta acción debe realizarse <strong>únicamente bajo la supervisión de un
+                adulto</strong>.
+        </div>
+        <div class="botones">
+            <div class="fila-ingredientes">
+                <button id="btn-remolacha">REMOLACHA</button>
+                <button id="btn-repollo">REPOLLO MORADO</button>
+                <button id="btn-cebolla">CÁSCARA DE CEBOLLA</button>
+            </div>
+
+            <div class="container">
+                <div class="tubo-container" id="tubo-verdura"></div>
+                <div id="fuego" style="display: none; font-size: 2rem; text-align: center;">🔥🔥🔥</div>
+            </div>
+
+
+            <div class="fila-acciones">
+
+                <button id="btn-hervir">HERVIR</button>
+                <button class="reiniciar">REINICIAR</button>
+               <a href="https://ji906carmendiharce3f.github.io/laboratoriodepigmentos">
+    <button id="volver">VOLVER</button>
+</a>
+
+            </div>
         </div>
     </div>
 

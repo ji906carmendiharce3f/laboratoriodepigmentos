@@ -18,16 +18,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   min-height: 100vh;
-  padding: 20px;
-}
-
-p {
-  font-size: 1.5rem;
-  text-align: center;
-  margin-bottom: 20px;
-  width: 100%;
+  padding: 20px; 
 }
 
 .container {
@@ -44,18 +37,13 @@ p {
 .tubo-container {
   width: 100%;
   max-width: 120px;
-  height: 400px; 
+  height: 300px;
   border: 4px solid #c4e0f7;
   border-radius: 10px 10px 50px 50px;
   background: linear-gradient(to top, #c4e0f7 0%, #c4e0f7 100%);
   overflow: hidden;
   position: relative;
   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .capa {
@@ -86,6 +74,26 @@ p {
   gap: 10px;
 }
 
+.fila-ingredientes {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px;
+  flex-wrap: nowrap;
+}
+
+.fila-ingredientes button {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+}
+
 button {
   padding: 12px;
   font-size: 1rem;
@@ -114,85 +122,18 @@ button {
   background-color: rgb(1, 167, 209);
 }
 
-#btn-mezcla {
+#btn-mezclar {
   background-color: rgb(20, 0, 134);
 }
 
 .reiniciar {
-  background-color: rgb(173, 0, 0);
+  background-color: rgb(0, 0, 0);
   margin: 10px auto 0;
   padding: 15px 20px;
   font-size: 16px;
   width: 100%;
   max-width: 180px;
   text-align: center;
-}
-
-.color-box {
-  width: 50px;
-  height: 50px;
-  border: 2px solid #666;
-  border-radius: 8px;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.fila-ingredientes {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 10px;
-  flex-wrap: nowrap;
-}
-
-.fila-ingredientes button {
-  flex: 1 1 0;
-  min-width: 0;
-  padding: 15px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  text-align: center;
-
-  display: flex;           /* Para centrar el texto verticalmente */
-  align-items: center;     /* Centrado vertical */
-  justify-content: center; /* Centrado horizontal */
-}
-
-
-/* ✅ Media Queries para pantallas más pequeñas */
-@media (max-width: 600px) {
-  p {
-    font-size: 1.2rem;
-  }
-
-.tubo-container {
-    max-width: 100px;
-    height: 300px; /* tubo más alto en móvil también */
-  }
-
-  button {
-    font-size: 0.9rem;
-    min-width: 100px;
-  }
-
-  .reiniciar {
-    font-size: 1rem;
-  }
-
-  /* Centrar el simulador en pantallas pequeñas */
-  #simulador {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 600px;
-    min-height: 80vh;
-    padding: 20px;
-    box-sizing: border-box;
-  }
 }
 
 .pantalla-inicio {
@@ -211,35 +152,70 @@ button {
   z-index: 1000;
 }
 
-.pantalla-inicio .logo {
-  max-width: 150px;
-  margin-bottom: 20px;
-}
-
-.pantalla-inicio h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.pantalla-inicio p {
-  font-size: 1rem;
-  margin-bottom: 30px;
-  color: #555;
-  max-width: 400px;
-}
-
-#btn-comenzar {
+#btn-residuos,
+#btn-verduras {
   padding: 15px 30px;
   font-size: 1.1rem;
   border: none;
   border-radius: 5px;
+  margin: 10px;
   background-color: #ff6600;
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-#btn-comenzar:hover {
+#btn-residuos:hover,
+#btn-verduras:hover {
   background-color: #613700;
+}
+
+/* Verdura botones */
+#btn-remolacha {
+  background-color: rgb(122, 0, 60);
+}
+
+#btn-repollo {
+  background-color: #36005c;
+}
+
+#btn-cebolla {
+  background-color: #993000;
+}
+
+#btn-hervir {
+  background-color: #ff0000;
+    margin: 10px auto 0;
+  padding: 15px 20px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 180px;
+  text-align: center;
+}
+
+#btn-agua-verdura {
+  background-color: #01a7d1;
+}
+
+#volver{
+     background-color: rgb(0, 0, 0);
+  margin: 10px auto 0;
+  padding: 15px 20px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 180px;
+  text-align: center;
+}
+#fuego {
+  margin-top: 10px;
+  animation: fuegoParpadeo 0.5s infinite alternate;
+}
+
+@keyframes fuegoParpadeo {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.6;
+  }
 }
