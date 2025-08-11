@@ -318,7 +318,7 @@ function actualizarVisualVerdura() {
       }
       if (ingredientesVerdura.repollo > 0) {
         const h = (ingredientesVerdura.repollo / totalVerduras) * alturaVerduras;
-        tuboVerdura.appendChild(crearCapa("Repollo", "#36005c", ingredientesVerdura.repollo, h));
+        tuboVerdura.appendChild(crearCapa("Repollo", "#000671ff", ingredientesVerdura.repollo, h));
       }
       if (ingredientesVerdura.cebolla > 0) {
         const h = (ingredientesVerdura.cebolla / totalVerduras) * alturaVerduras;
@@ -339,7 +339,7 @@ function actualizarVisualVerdura() {
     }
     if (ingredientesVerdura.repollo > 0) {
       const h = (ingredientesVerdura.repollo / totalVerduras) * alturaVerduras;
-      tuboVerdura.appendChild(crearCapa("Repollo", "#36005c", ingredientesVerdura.repollo, h));
+      tuboVerdura.appendChild(crearCapa("Repollo", "#000671ff", ingredientesVerdura.repollo, h));
     }
     if (ingredientesVerdura.cebolla > 0) {
       const h = (ingredientesVerdura.cebolla / totalVerduras) * alturaVerduras;
@@ -433,12 +433,12 @@ function calcularColorArrayVerdura() {
 
   // Colores base
   const baseRemolacha = [122, 0, 60];
-  const baseRepollo = [54, 0, 92];
+  const baseRepollo = [0, 6, 113];
   const baseCebolla = [153, 48, 0];
 
   // Colores brillantes
   const colorRemolacha = [252, 0, 126];
-  const colorRepollo = [158, 22, 255];
+  const colorRepollo = [0, 13, 255];
   const colorCebolla = [255, 81, 0];
 
 
